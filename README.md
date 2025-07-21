@@ -20,10 +20,10 @@ Esta automatización permite:
 ## 📸 Vista previa
 
 ### 🖥️ Flujo en Make.com
-![Flujo de la automatización](assets/automatizacion-flujo.png)
+![Flujo de la automatización](assets/AUTOMATIZACION%20PARA%20CAPTAR%20CLIENTES.png)
 
-### 📄 Google Sheets con los registros
-![Registros en Google Sheets](assets/automatizacion-registros.png)
+### 📄 Registros en Google Sheets
+![Registros en Google Sheets](assets/GOOGLE%20SHEETS%20-%20AUTOMATIZACION%20PARA%20CAPTAR%20CLIENTES.png)
 
 ---
 
