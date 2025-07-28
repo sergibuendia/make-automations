@@ -10,5 +10,5 @@ Automatizaciones realizadas con la plataforma Make.com en mi tiempo libre. Cada 
 ## 👨‍💻 Autor
 
 **Sergi Buendia**  
-🔗 [github.com/sergibuendia](https://github.com/sergibuendia)
-🔗 Linkedin: [https://www.linkedin.com/in/sergi-buendia-arnau-4b9013234/]
+- 🔗 [github.com/sergibuendia](https://github.com/sergibuendia)
+- 🔗 Linkedin: [https://www.linkedin.com/in/sergi-buendia-arnau-4b9013234/]
