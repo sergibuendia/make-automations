@@ -17,11 +17,11 @@ Esta automatización está dividida en **2 automatizaciones conectadas** entre s
 
 ### 🖼️ Vista del flujo:
 
-![Flujo Parte 1](../assets/scraper-gpt/parte-1-flujo-make.png)
+![Flujo Parte 1](../assets/scraper-gpt-automation/PARTE%201%20-%20GPT%20SCAPER.png)
 
 ### 🧠 Instrucciones del GPT:
 
-![Instrucciones GPT](../assets/scraper-gpt/instrucciones-gpt.png)
+![Instrucciones GPT](../assets/scraper-gpt-automation/CONFIGURACI%C3%93N%20GPT%20SCAPER.png)
 
 ### 🔗 Enlace del GPT personalizado: https://chatgpt.com/g/g-67a0f1a2f3048191a9a64652e8bbf557-scraper-info-nichos
 
@@ -37,11 +37,11 @@ Esta automatización está dividida en **2 automatizaciones conectadas** entre s
 
 ### 🖼️ Vista del flujo:
 
-![Flujo Parte 2](../assets/scraper-gpt/parte-2-flujo-make.png)
+![Flujo Parte 2](../assets/scraper-gpt-automation/PARTE%202%20-%20GPT%20SCAPER.png)
 
 ### 📊 Ejemplo de hoja de cálculo:
 
-![Ejemplo de Google Sheets](../assets/scraper-gpt/google-sheets-ejemplo.png)
+![Ejemplo de Google Sheets](../assets/scraper-gpt-automation/GOOGLE%20SHEETS%20-%20GPT%20SCAPER%20INFO.png)
 
 ---
 
