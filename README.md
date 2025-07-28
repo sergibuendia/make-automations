@@ -4,7 +4,7 @@ Automatizaciones realizadas con la plataforma Make.com en mi tiempo libre. Cada 
 
 ## 📂 Proyectos
 - 📧 [Automatización para captar clientes enviando correos con IA](captar-clientes-automation)
-- 🔍 [Scraper GPT Automation: Búsqueda de empresas + envío automático de correos](scraper-gpt-automation)
+- 🔍 [Scraper GPT Automation: Captación de leads en automático + envío automático de correos](scraper-gpt-automation)
 
 ## 👨‍💻 Autor
 
