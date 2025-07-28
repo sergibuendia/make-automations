@@ -1,0 +1,660 @@
+{
+    "properties": {
+        "provisioningState": "Succeeded",
+        "createdTime": "2025-06-10T16:54:10.8002056Z",
+        "changedTime": "2025-06-11T09:10:11.2390657Z",
+        "state": "Enabled",
+        "version": "08584519738742565271",
+        "accessEndpoint": "https://prod-187.westeurope.logic.azure.com:443/workflows/4b91e1478635465e985f3f1ae23a2050",
+        "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "$connections": {
+                    "defaultValue": {},
+                    "type": "Object"
+                }
+            },
+            "triggers": {
+                "Recurrence": {
+                    "recurrence": {
+                        "interval": 4,
+                        "frequency": "Day"
+                    },
+                    "evaluatedRecurrence": {
+                        "interval": 4,
+                        "frequency": "Day"
+                    },
+                    "type": "Recurrence"
+                }
+            },
+            "actions": {
+                "API_NewsAPI.org_-_Extracción_de_noticias_(HTTP)": {
+                    "runAfter": {},
+                    "type": "Http",
+                    "inputs": {
+                        "uri": "https://newsapi.org/v2/everything?q=Inteligencia+Artificial&pageSize=1&sortBy=publishedAt&language=es&apiKey=7692ed62387841ed964dc5f4b0adc317",
+                        "method": "GET",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        }
+                    },
+                    "runtimeConfiguration": {
+                        "contentTransfer": {
+                            "transferMode": "Chunked"
+                        }
+                    }
+                },
+                "Parse_JSON": {
+                    "runAfter": {
+                        "API_NewsAPI.org_-_Extracción_de_noticias_(HTTP)": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "ParseJson",
+                    "inputs": {
+                        "content": "@body('API_NewsAPI.org_-_Extracción_de_noticias_(HTTP)')",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string"
+                                },
+                                "totalResults": {
+                                    "type": "integer"
+                                },
+                                "articles": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "source": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "author": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            },
+                                            "urlToImage": {
+                                                "type": "string"
+                                            },
+                                            "publishedAt": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "Initialize_variables": {
+                    "runAfter": {
+                        "Parse_JSON": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "InitializeVariable",
+                    "inputs": {
+                        "variables": [
+                            {
+                                "name": "DescripcionNoticia",
+                                "type": "string",
+                                "value": "@{first(body('Parse_JSON')?['articles'])?['description']}"
+                            }
+                        ]
+                    }
+                },
+                "API_ChatGPT_(HTTP)": {
+                    "runAfter": {
+                        "Initialize_variables": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "Http",
+                    "inputs": {
+                        "uri": "https://api.openai.com/v1/chat/completions",
+                        "method": "POST",
+                        "headers": {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer {{OPENAI_API_KEY}}"
+                        },
+                        "body": {
+                            "model": "gpt-4",
+                            "messages": [
+                                {
+                                    "role": "system",
+                                    "content": "Eres un redactor profesional de redes sociales, especializado en adaptar noticias reales para Instagram. Tu tarea es reescribir la noticia de forma clara, concisa y profesional, sin inventar información ni omitir detalles importantes. El estilo debe ser informativo, directo y fácil de leer. No incluyas explicaciones sobre tu rol, solo devuelve el texto final listo para usar como pie de foto en una publicación."
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Reescribe esta noticia para una publicación de Instagram, manteniendo toda la información clave y el contexto original: @{variables('descripcionNoticia')}. Quiero que añadas hastags relacionados con la noticia al final de la publicación"
+                                }
+                            ],
+                            "temperature": 0.7
+                        }
+                    },
+                    "runtimeConfiguration": {
+                        "contentTransfer": {
+                            "transferMode": "Chunked"
+                        }
+                    }
+                },
+                "Initialize_variables_1": {
+                    "runAfter": {
+                        "API_ChatGPT_(HTTP)": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "InitializeVariable",
+                    "inputs": {
+                        "variables": [
+                            {
+                                "name": "noticiaReescrita",
+                                "type": "string",
+                                "value": "@{body('API_ChatGPT_(HTTP)').choices[0].message.content}\n"
+                            }
+                        ]
+                    }
+                },
+                "Llamada_al_Webhook_de_Make.com": {
+                    "runAfter": {
+                        "Initialize_variables_1": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "Http",
+                    "inputs": {
+                        "uri": "https://hook.eu2.make.com/6kdolrxx5hic0dpu1jkc0dh9xbxof1iv",
+                        "method": "POST",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": {
+                            "texto": "@variables('noticiaReescrita')"
+                        }
+                    },
+                    "runtimeConfiguration": {
+                        "contentTransfer": {
+                            "transferMode": "Chunked"
+                        }
+                    }
+                }
+            },
+            "outputs": {}
+        },
+        "parameters": {
+            "$connections": {
+                "value": {}
+            }
+        },
+        "endpointsConfiguration": {
+            "workflow": {
+                "outgoingIpAddresses": [
+                    {
+                        "address": "40.68.222.65"
+                    },
+                    {
+                        "address": "40.68.209.23"
+                    },
+                    {
+                        "address": "13.95.147.65"
+                    },
+                    {
+                        "address": "23.97.218.130"
+                    },
+                    {
+                        "address": "51.144.182.201"
+                    },
+                    {
+                        "address": "23.97.211.179"
+                    },
+                    {
+                        "address": "104.45.9.52"
+                    },
+                    {
+                        "address": "23.97.210.126"
+                    },
+                    {
+                        "address": "13.69.71.160"
+                    },
+                    {
+                        "address": "13.69.71.161"
+                    },
+                    {
+                        "address": "13.69.71.162"
+                    },
+                    {
+                        "address": "13.69.71.163"
+                    },
+                    {
+                        "address": "13.69.71.164"
+                    },
+                    {
+                        "address": "13.69.71.165"
+                    },
+                    {
+                        "address": "13.69.71.166"
+                    },
+                    {
+                        "address": "13.69.71.167"
+                    },
+                    {
+                        "address": "20.103.21.81"
+                    },
+                    {
+                        "address": "20.103.17.247"
+                    },
+                    {
+                        "address": "20.103.17.223"
+                    },
+                    {
+                        "address": "20.103.16.47"
+                    },
+                    {
+                        "address": "20.103.58.116"
+                    },
+                    {
+                        "address": "20.103.57.29"
+                    },
+                    {
+                        "address": "20.101.174.49"
+                    },
+                    {
+                        "address": "20.101.174.23"
+                    },
+                    {
+                        "address": "20.93.236.26"
+                    },
+                    {
+                        "address": "20.93.235.107"
+                    },
+                    {
+                        "address": "20.103.94.250"
+                    },
+                    {
+                        "address": "20.76.174.72"
+                    },
+                    {
+                        "address": "20.82.87.192"
+                    },
+                    {
+                        "address": "20.82.87.16"
+                    },
+                    {
+                        "address": "20.76.170.145"
+                    },
+                    {
+                        "address": "20.103.91.39"
+                    },
+                    {
+                        "address": "20.103.84.41"
+                    },
+                    {
+                        "address": "20.76.161.156"
+                    },
+                    {
+                        "address": "98.64.193.64"
+                    },
+                    {
+                        "address": "98.64.194.135"
+                    },
+                    {
+                        "address": "98.64.198.219"
+                    },
+                    {
+                        "address": "98.64.198.194"
+                    },
+                    {
+                        "address": "98.64.208.46"
+                    },
+                    {
+                        "address": "98.64.209.43"
+                    },
+                    {
+                        "address": "172.211.196.188"
+                    },
+                    {
+                        "address": "172.211.195.181"
+                    },
+                    {
+                        "address": "98.64.157.37"
+                    },
+                    {
+                        "address": "98.64.156.69"
+                    },
+                    {
+                        "address": "98.64.156.152"
+                    },
+                    {
+                        "address": "98.64.156.62"
+                    },
+                    {
+                        "address": "20.238.229.108"
+                    },
+                    {
+                        "address": "108.141.139.225"
+                    },
+                    {
+                        "address": "20.238.230.87"
+                    },
+                    {
+                        "address": "108.141.139.80"
+                    },
+                    {
+                        "address": "108.142.111.161"
+                    },
+                    {
+                        "address": "108.142.111.173"
+                    },
+                    {
+                        "address": "108.142.111.175"
+                    },
+                    {
+                        "address": "108.142.111.182"
+                    },
+                    {
+                        "address": "108.142.111.151"
+                    },
+                    {
+                        "address": "108.142.111.155"
+                    },
+                    {
+                        "address": "108.142.111.157"
+                    },
+                    {
+                        "address": "108.142.111.167"
+                    },
+                    {
+                        "address": "98.64.203.5"
+                    },
+                    {
+                        "address": "98.64.156.150"
+                    },
+                    {
+                        "address": "20.56.202.134"
+                    },
+                    {
+                        "address": "20.56.202.244"
+                    },
+                    {
+                        "address": "57.153.19.27"
+                    },
+                    {
+                        "address": "57.153.59.193"
+                    },
+                    {
+                        "address": "108.141.95.129"
+                    },
+                    {
+                        "address": "20.61.147.200"
+                    },
+                    {
+                        "address": "57.153.83.40"
+                    },
+                    {
+                        "address": "57.153.38.60"
+                    },
+                    {
+                        "address": "57.153.2.162"
+                    },
+                    {
+                        "address": "57.153.1.215"
+                    },
+                    {
+                        "address": "108.142.24.182"
+                    },
+                    {
+                        "address": "108.142.31.170"
+                    },
+                    {
+                        "address": "108.142.31.143"
+                    },
+                    {
+                        "address": "20.61.152.226"
+                    },
+                    {
+                        "address": "57.153.7.245"
+                    },
+                    {
+                        "address": "108.141.83.46"
+                    },
+                    {
+                        "address": "57.153.7.245"
+                    },
+                    {
+                        "address": "108.141.83.46"
+                    }
+                ],
+                "accessEndpointIpAddresses": [
+                    {
+                        "address": "13.95.155.53"
+                    },
+                    {
+                        "address": "52.174.54.218"
+                    },
+                    {
+                        "address": "52.174.49.6"
+                    },
+                    {
+                        "address": "20.103.21.113"
+                    },
+                    {
+                        "address": "20.103.18.84"
+                    },
+                    {
+                        "address": "20.103.57.210"
+                    },
+                    {
+                        "address": "20.101.174.52"
+                    },
+                    {
+                        "address": "20.93.236.81"
+                    },
+                    {
+                        "address": "20.103.94.255"
+                    },
+                    {
+                        "address": "20.82.87.229"
+                    },
+                    {
+                        "address": "20.76.171.34"
+                    },
+                    {
+                        "address": "20.103.84.61"
+                    },
+                    {
+                        "address": "98.64.193.78"
+                    },
+                    {
+                        "address": "98.64.194.143"
+                    },
+                    {
+                        "address": "98.64.198.223"
+                    },
+                    {
+                        "address": "98.64.198.203"
+                    },
+                    {
+                        "address": "98.64.208.186"
+                    },
+                    {
+                        "address": "98.64.209.52"
+                    },
+                    {
+                        "address": "172.211.196.189"
+                    },
+                    {
+                        "address": "172.211.195.251"
+                    },
+                    {
+                        "address": "98.64.154.66"
+                    },
+                    {
+                        "address": "98.64.156.81"
+                    },
+                    {
+                        "address": "98.64.156.180"
+                    },
+                    {
+                        "address": "98.64.156.68"
+                    },
+                    {
+                        "address": "20.238.229.165"
+                    },
+                    {
+                        "address": "20.8.128.2"
+                    },
+                    {
+                        "address": "20.238.230.113"
+                    },
+                    {
+                        "address": "108.141.139.111"
+                    },
+                    {
+                        "address": "108.142.111.162"
+                    },
+                    {
+                        "address": "108.142.111.174"
+                    },
+                    {
+                        "address": "108.142.111.178"
+                    },
+                    {
+                        "address": "108.142.111.183"
+                    },
+                    {
+                        "address": "108.142.111.152"
+                    },
+                    {
+                        "address": "108.142.111.156"
+                    },
+                    {
+                        "address": "108.142.111.179"
+                    },
+                    {
+                        "address": "108.142.111.169"
+                    },
+                    {
+                        "address": "98.64.203.30"
+                    },
+                    {
+                        "address": "98.64.156.172"
+                    },
+                    {
+                        "address": "20.56.202.157"
+                    },
+                    {
+                        "address": "20.56.203.30"
+                    },
+                    {
+                        "address": "57.153.19.33"
+                    },
+                    {
+                        "address": "57.153.59.202"
+                    },
+                    {
+                        "address": "108.141.95.140"
+                    },
+                    {
+                        "address": "20.61.147.216"
+                    },
+                    {
+                        "address": "57.153.83.52"
+                    },
+                    {
+                        "address": "57.153.38.174"
+                    },
+                    {
+                        "address": "57.153.3.13"
+                    },
+                    {
+                        "address": "57.153.1.223"
+                    },
+                    {
+                        "address": "108.142.29.55"
+                    },
+                    {
+                        "address": "108.142.31.220"
+                    },
+                    {
+                        "address": "108.142.31.202"
+                    },
+                    {
+                        "address": "20.61.153.22"
+                    },
+                    {
+                        "address": "57.153.7.252"
+                    },
+                    {
+                        "address": "108.141.83.61"
+                    },
+                    {
+                        "address": "57.153.7.252"
+                    },
+                    {
+                        "address": "108.141.83.61"
+                    }
+                ]
+            },
+            "connector": {
+                "outgoingIpAddresses": [
+                    {
+                        "address": "52.174.88.118"
+                    },
+                    {
+                        "address": "40.91.208.65"
+                    },
+                    {
+                        "address": "13.69.64.208/28"
+                    },
+                    {
+                        "address": "13.69.71.192/27"
+                    },
+                    {
+                        "address": "13.93.36.78"
+                    },
+                    {
+                        "address": "20.86.93.32/27"
+                    },
+                    {
+                        "address": "20.86.93.64/28"
+                    },
+                    {
+                        "address": "20.126.243.151"
+                    },
+                    {
+                        "address": "20.126.241.238"
+                    },
+                    {
+                        "address": "20.103.132.139"
+                    },
+                    {
+                        "address": "20.103.131.1"
+                    }
+                ]
+            }
+        }
+    },
+    "id": "/subscriptions/c48e54af-f527-4148-9b50-dac64aeec86f/resourceGroups/WorkflowTecnologiasCloudEAE_group/providers/Microsoft.Logic/workflows/NoticiasAItoInstagram",
+    "name": "NoticiasAItoInstagram",
+    "type": "Microsoft.Logic/workflows",
+    "location": "westeurope",
+    "apiVersion": "2015-08-01-preview"
+}
