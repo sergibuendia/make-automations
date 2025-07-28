@@ -23,8 +23,8 @@ En esta parte se realiza lo siguiente:
 5. Finalmente, se realiza una **llamada a un webhook de Make.com** para pasar la información a la segunda parte.
 
 **📷 Capturas de pantalla relevantes de la primera parte de la automatización:**
-- ![PARTE 1 - Automatización Logic APPS](../../assets/noticias-instagram-automation/PARTE%201%20-%20Automatización%20Logic%20APPS.png)
-- ![PROMPT API ChatGPT (LogicApps)](../../assets/noticias-instagram-automation/PROMPT%20API%20ChatGPT%20(LogicApps).png)
+- ![PARTE 1 - Automatización Logic APPS](../assets/noticias-instagram-automation/PARTE%201%20-%20Automatización%20Logic%20APPS.png)
+- ![PROMPT API ChatGPT (LogicApps)](../assets/noticias-instagram-automation/PROMPT%20API%20ChatGPT%20(LogicApps).png)
 
 ### 🤖 **Parte 2 - Generación de imagen y publicación automática en **Instagram con Make.com**
 Una vez recibido el contenido desde Logic Apps, esta segunda automatización realiza:
@@ -36,8 +36,8 @@ Una vez recibido el contenido desde Logic Apps, esta segunda automatización rea
    - Se sube la imagen generada automáticamente por DALL·E.
 
 **📷 Capturas de pantalla relevantes de la segunda parte de la automatización:**
-- ![PARTE 2 - Automatización Make.com (Publicar noticia en Instagram)](../../assets/noticias-instagram-automation/PARTE%202%20-%20Automatización%20Make.com%20(Publicar%20noticia%20en%20Instagram).png)
-- ![PROMPT DALL-E (Generación de imagen para publicación en Instagram)](../../assets/noticias-instagram-automation/PROMPT%20DALL-E%20(Generación%20de%20imagen%20para%20publicación%20en%20Instagram).png)
+- ![PARTE 2 - Automatización Make.com (Publicar noticia en Instagram)](../assets/noticias-instagram-automation/PARTE%202%20-%20Automatización%20Make.com%20(Publicar%20noticia%20en%20Instagram).png)
+- ![PROMPT DALL-E (Generación de imagen para publicación en Instagram)](../assets/noticias-instagram-automation/PROMPT%20DALL-E%20(Generación%20de%20imagen%20para%20publicación%20en%20Instagram).png)
 
 ---
 
