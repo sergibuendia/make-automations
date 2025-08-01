@@ -58,8 +58,8 @@ Cuando el contenido es marcado como `Aprobado`, esta segunda automatización se 
 
 Este repositorio contiene los .json de las dos automatizaciones:
 
-- `community-manager-create-content.json`: Automatización Parte 1
-- `community-manager-post-content.json`: Automatización Parte 2
+- 📁 [Descargar blueprint Make (Parte 1)](./Contenido%20redes%20con%20ideas%20(Parte%201).blueprint.json)
+- 📁 [Descargar blueprint Make (Parte 2)](./Community%20Manager%20-%20RRSS%20(parte%202).blueprint.json)
 
 Puedes importar estos archivos directamente en Make.com para tener las automatizaciones listas para editar o ejecutar.
 
@@ -68,4 +68,3 @@ Puedes importar estos archivos directamente en Make.com para tener las automatiz
 ## 🧠 Conclusión
 
 Gracias a la integración de herramientas como **Google Sheets**, **OpenAI (ChatGPT + DALL·E)** y **Make.com**, este sistema permite gestionar contenido de redes sociales de principio a fin sin intervención manual, reduciendo tiempos de publicación en distintas redes, y facilitando a generar más engagement a la audiencia de nuestras redes sociales. Adaptable a cualquier empresa, negocio o nicho.
-
