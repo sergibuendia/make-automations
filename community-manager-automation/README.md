@@ -6,13 +6,13 @@ Esta automatización combina dos automatizaciones conectadas entre sí para gene
 
 ## ⚙️ ¿Como funcionan las automatizaciones?
 
-### 🧩 Automatización 1 (Parte 1) – Creación de contenido
+### 🧩 Automatización 1 (Parte 1) – Creación de contenido a partir de ideas y descripciones de la misma
 
 A partir de un Google Sheets con ideas y descripciones de dicha idea, se genera:
 
 - ✍️ El contenido textual de los posts para cada red social.
 - 🧠 Generación automática de la imagen del post con un módulo de DALL·E (para Instagram).
-- 🗂 Registro del contenido de los posts en un nuevo Google Sheets (rol de Community Manager), con una columna en la cual aprobaremos o no dicho contenido para publicar.
+- 🗂 Registro del contenido de los posts en un nuevo Google Sheets (rol de Community Manager), con una columna en la cual aprobaremos o no dicho contenido para publicar (Columna E1 - Aprobación).
 
 📍 Esta automatización se activa automáticamente cada vez que se añade una nueva idea al Google Sheets.
 
@@ -30,13 +30,15 @@ A partir de un Google Sheets con ideas y descripciones de dicha idea, se genera:
 
 ---
 
-### 🚀 Automatización Parte 2 – Publicación automática
+### 🚀 Automatización 2 (Parte 2) – Publicación automática en RRSS --> Rol de Community Manager
 
 Cuando el contenido es marcado como `Aprobado`, esta segunda automatización se activa y:
 
-- 🗓 Publica automáticamente el contenido en Instagram, LinkedIn y Facebook.
-- 🔁 Actualiza el estado de la publicación en el Google Sheets a `Publicado`.
-- 🧠 En caso necesario, genera una nueva imagen con DALL·E (si se desea reemplazar la anterior).
+- 🗓 Publica automáticamente el contenido en Instagram, LinkedIn y Facebook, siempre y cuando aprobemos la publicación (Columna E1 - Aprobación).
+- 🔁 Actualiza el estado de la publicación en el Google Sheets a `Publicado` (Columna F1 - Estado de la publicación).
+- 🧠 En caso necesario, genera una nueva imagen con DALL·E (si la anterior imagen generada no nos ha convencido).
+
+> Con esta segunda automatización, nos aseguramos de revisar y leer el contenido generado por la Inteligencia Artificial. En el caso de que nos guste, podremos modificar el contenido manualmente, o bien descartarlo.
 
 #### 🖼️ Vista del escenario Make.com
 
@@ -50,7 +52,7 @@ Cuando el contenido es marcado como `Aprobado`, esta segunda automatización se 
 
 ## 🧩 Archivos JSON
 
-Este repositorio contiene:
+Este repositorio contiene los .json de las dos automatizaciones:
 
 - `community-manager-create-content.json`: Automatización Parte 1
 - `community-manager-post-content.json`: Automatización Parte 2
@@ -61,5 +63,5 @@ Puedes importar estos archivos directamente en Make.com para tener las automatiz
 
 ## 🧠 Conclusión
 
-Gracias a la integración de herramientas como **Google Sheets**, **OpenAI (ChatGPT + DALL·E)** y **Make.com**, este sistema permite gestionar contenido de redes sociales de principio a fin sin intervención manual, reduciendo tiempos y facilitando la coherencia del mensaje en múltiples canales.
+Gracias a la integración de herramientas como **Google Sheets**, **OpenAI (ChatGPT + DALL·E)** y **Make.com**, este sistema permite gestionar contenido de redes sociales de principio a fin sin intervención manual, reduciendo tiempos de publicación en distintas redes, y facilitando a generar más engagement a la audiencia de nuestras redes sociales. Adaptable a cualquier empresa, negocio o nicho.
 
