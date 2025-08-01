@@ -44,9 +44,10 @@ Cuando el contenido es marcado como `Aprobado`, esta segunda automatización se 
 
 ![Automatización publicación de contenido](../assets/community-manager-automation/PARTE%202%20-%20Automatizaci%C3%B3n%20publicaci%C3%B3n%20RRSS.png)
 
-#### 📱 Capturas de publicaciones reales
+#### 📱 Capturas de ejemplos de posts reales ya publicados
 
-![Instagram Feed](../assets/community-manager-automation/POSTS%20GENERADOS%20EN%20INSTAGRAM.png)
+![Ejemplo de post en Instagram](../assets/community-manager-automation/POST%20GENERADO%20EN%20INSTAGRAM.png)
+![Ejemplo de post en Facebook](../assets/community-manager-automation/POST%20GENERADO%20EN%20FACEBOOK.png)
 
 ---
 
