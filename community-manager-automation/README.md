@@ -46,7 +46,10 @@ Cuando el contenido es marcado como `Aprobado`, esta segunda automatización se 
 
 #### 📱 Capturas de ejemplos de posts reales ya publicados
 
+#### 📱 Ejemplo de post en Instagram
 ![Ejemplo de post en Instagram](../assets/community-manager-automation/POST%20GENERADO%20EN%20INSTAGRAM.png)
+
+#### 📱 Ejemplo de post en Facebook
 ![Ejemplo de post en Facebook](../assets/community-manager-automation/POST%20GENERADO%20EN%20FACEBOOK.png)
 
 ---
