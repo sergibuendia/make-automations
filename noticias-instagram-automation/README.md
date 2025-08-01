@@ -38,7 +38,14 @@ Una vez recibido el contenido desde Logic Apps, esta segunda automatización rea
 **📷 Capturas de pantalla relevantes de la segunda parte de la automatización:**
 - ![PARTE 2 - Automatización Make.com (Publicar noticia en Instagram)](../assets/noticias-instagram-automation/PARTE%202%20-%20Automatización%20Make.com%20(Publicar%20noticia%20en%20Instagram).png)
 - ![PROMPT DALL-E (Generación de imagen para publicación en Instagram)](../assets/noticias-instagram-automation/PROMPT%20DALL-E%20(Generación%20de%20imagen%20para%20publicación%20en%20Instagram).png)
-- ![PUBLICACIÓN EN INSTAGRAM](../assets/noticias-instagram-automation/PROMPT%20DALL-E%20(Generación%20de%20imagen%20para%20publicación%20en%20Instagram).png)
+
+### 🖼️ Capturas de pantalla de los resultados de la automatización (POST EN INSTAGRAM)
+
+#### 📸 Perfil de Instagram con varias publicaciones realizadas con la automatización
+![Perfil de Instagram](../assets/noticias-instagram-automation/perfil-instagram.png)
+
+#### 🧾 Ejemplo de publicación en Instagram
+![Publicación de ejemplo](../assets/noticias-instagram-automation/post-ejemplo-instagram.png)
 
 ---
 
