@@ -52,6 +52,7 @@ Una vez recibido el contenido desde Logic Apps, esta segunda automatización rea
 ## 💡 Notas
 
 > Es importante destacar que esta automatización también se podría realizar 100% en Make.com, pero gracias a esta asignatura del máster he podido aprender a trabajar con Logic Apps y complementar herramientas low-code.
+> Si mejoramos los prompts, o bien utilizamos un modelo de ChatGPT más avanzado, la calidad de la piublicación en Instagram aumentaría considerablemente.
 
 ---
 
