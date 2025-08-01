@@ -6,6 +6,8 @@ Automatizaciones realizadas con la plataforma Make.com en mi tiempo libre. Cada 
 - 📧 [Automatización para captar clientes enviando correos con IA](captar-clientes-automation)
 - 🔍 [Scraper GPT Automation: Captación de leads en automático + envío automático de correos](scraper-gpt-automation)
 - 📰 [Automatización para publicar noticias en Instagram usando LogicApps + Make.com](noticias-instagram-automation)
+- 🧑‍💼 [Community Manager Automatizado: Crea y publica contenido en Instagram, LinkedIn y Facebook con IA](./community-manager-automation)
+
 
 ## 👨‍💻 Autor
 
