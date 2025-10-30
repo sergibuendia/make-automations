@@ -1,5 +1,5 @@
 # make-automations
-Automatizaciones realizadas en mi tiempo libre con la plataforma Make.com. Aún queda mucho por aprender :)
+Automatizaciones en Make.com
 
 # ✉️ Automatización de Envío de Correos con IA para captar potenciales clientes
 
